@@ -22,10 +22,10 @@ int main()
         }
         
         if ( no_button == true ) { cout << "no" << endl;}
-        else { cout << "yes" << endl; }
+        else { cout << "yess" << endl; }
 
     }
-
+    
     return 0;
 
 }
