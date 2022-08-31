@@ -8,7 +8,7 @@ int main()
     int num;
     cin >> num;
 
-    for (int row = 1 ; row <= num ; row++) {
+    for (int row = 0 ; row < num ; row++) {
 
         for (int i = 0 ; i < num - row ; i++) {
             cout << " " ;
