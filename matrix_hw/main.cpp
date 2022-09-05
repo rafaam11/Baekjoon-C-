@@ -40,7 +40,6 @@ void fillArange(Matrix* mat, int value)           // Matrix의 데이터를 초�
 
 }
 
-
 void PrintMatrix(Matrix* mat)               // Matrix의 모든 데이터 값을 출력하는 함수
 {
     for (int width=0; width < mat->w; ++width) {
@@ -112,26 +111,26 @@ int main()
     cin >> w2 >> h2 ;
 
     // mat1 생성 및 숫자 채우기
-    cout << "\n mat1 \n" ;
+    cout << "\n mat1 = \n" ;
     Matrix* mat1 = CreateMatrix(w1, h1);
     int val1 = 4; // mat2 데이터를 채울 값
     fillArange(mat1, val1);
     PrintMatrix(mat1);
 
     // mat2 생성 및 숫자 채우기
-    cout << "\n mat2 \n" ;
+    cout << "\n mat2 = \n" ;
     Matrix* mat2 = CreateMatrix(w2, h2);
     int val2 = 10; // mat2 데이터를 채울 값
     fillArange(mat2, val2);
     PrintMatrix(mat2);
 
     // 곱셈 연산
-    cout << "\n mat1 x mat2 \n" ;
+    cout << "\n mat1 x mat2 = \n" ;
     Matrix* mat_mul = Multiply(mat1, mat2);
     if (mat1->h == mat2->w) PrintMatrix(mat_mul);
 
     // 덧셈 연산
-    cout << "\n mat1 + mat2 \n" ;
+    cout << "\n mat1 + mat2 = \n" ;
     Matrix* mat_add = Add(mat1, mat2);
     if (mat1->w == mat2->w && mat1->h == mat2->h) PrintMatrix(mat_add);
 
