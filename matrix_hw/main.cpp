@@ -22,12 +22,12 @@ Matrix* CreateMatrix(int width, int height)         // Matrix를 생성하는 �
 
 void fill(Matrix* mat, int value)           // Matrix의 데이터를 채우는 함수
 {
-    for (int height=0; height < mat->h; ++height) 
-        for (int width=0; width < mat->w; ++width) 
-            mat->data[height * mat->w + width] = value;
+    for (int width=0; width < mat->w; ++width) 
+        for (int height=0; height < mat->h; ++height) 
+            mat->data[width * mat->h + height] = value;
 }
 
-void fillArange(Matrix* mat, int value)           // Matrix의 데이터를 +1씩 더하여 채우는 함수
+void fillArange(Matrix* mat, int value)           // Matrix의 데이터를 초기 value에서 1씩 더하여 채우는 함수
 {
 
     for (int k=0; k < mat->h*mat->w; ++k) {
@@ -43,9 +43,9 @@ void fillArange(Matrix* mat, int value)           // Matrix의 데이터를 +1�
 
 void PrintMatrix(Matrix* mat)               // Matrix의 모든 데이터 값을 출력하는 함수
 {
-    for (int height=0; height < mat->h; ++height) {
-        for (int width=0; width < mat->w; ++width) {
-            cout << mat->data[height * mat->w + width] << " ";
+    for (int width=0; width < mat->w; ++width) {
+        for (int height=0; height < mat->h; ++height) {
+            cout << mat->data[width * mat->h + height] << " ";
         }
         cout << " " << endl;
     }   
@@ -60,13 +60,13 @@ Matrix* Multiply(Matrix* mat1, Matrix* mat2)        // Matrix 곱셈 연산을 �
     }
 
     else {
-        for (int height=0; height < mat3->h; ++height) {
-            for (int width=0; width < mat3->w; ++width) {
+        for (int width=0; width < mat3->w; ++width) {
+            for (int height=0; height < mat3->h; ++height) {
                 int element_sum = 0;
-                for (int k=0; k < mat1->w; ++k) {           // k: 덧셈연산 반복수
-                    element_sum += mat1->data[height + k] * mat2->data[k + width];
+                for (int k=0; k < mat1->h; ++k) {           // k: 덧셈연산 반복수 (0~)
+                    element_sum += mat1->data[width * mat1->h + k] * mat2->data[k * mat2->h + height];
                 }
-                mat3->data[height * mat3->w + width] = element_sum;
+                mat3->data[width * mat3->h + height] = element_sum;
             }
         }
     }
@@ -84,9 +84,9 @@ Matrix* Add(Matrix* mat1, Matrix* mat2)             // Matrix 덧셈 연산을 �
     }
 
     else {
-        for (int height=0; height < mat3->h; ++height) {
-            for (int width=0; width < mat3->w; ++width) {
-                mat3->data[height * mat3->w + width] = mat1->data[height * mat1->w + width] + mat2->data[height * mat2->w + width];
+        for (int width=0; width < mat3->w; ++width) {
+            for (int height=0; height < mat3->h; ++height) {
+                mat3->data[width * mat3->h + height] = mat1->data[width * mat1->h + height] + mat2->data[width * mat2->h + height];
             }
         }
 
@@ -112,26 +112,26 @@ int main()
     cin >> w2 >> h2 ;
 
     // mat1 생성 및 숫자 채우기
-    cout << "mat1 \n" ;
+    cout << "\n mat1 \n" ;
     Matrix* mat1 = CreateMatrix(w1, h1);
-    int val1 = 1; // mat2 데이터를 채울 값
+    int val1 = 4; // mat2 데이터를 채울 값
     fillArange(mat1, val1);
     PrintMatrix(mat1);
 
     // mat2 생성 및 숫자 채우기
-    cout << "mat2 \n" ;
+    cout << "\n mat2 \n" ;
     Matrix* mat2 = CreateMatrix(w2, h2);
-    int val2 = 2; // mat2 데이터를 채울 값
+    int val2 = 10; // mat2 데이터를 채울 값
     fillArange(mat2, val2);
     PrintMatrix(mat2);
 
     // 곱셈 연산
-    cout << "mat1 x mat2 \n" ;
+    cout << "\n mat1 x mat2 \n" ;
     Matrix* mat_mul = Multiply(mat1, mat2);
     if (mat1->h == mat2->w) PrintMatrix(mat_mul);
 
     // 덧셈 연산
-    cout << "mat1 + mat2 \n" ;
+    cout << "\n mat1 + mat2 \n" ;
     Matrix* mat_add = Add(mat1, mat2);
     if (mat1->w == mat2->w && mat1->h == mat2->h) PrintMatrix(mat_add);
 
