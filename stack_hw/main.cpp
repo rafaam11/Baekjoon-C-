@@ -1,13 +1,47 @@
 #include <iostream>
 using namespace std;
 
-
-struct Matrix               // "Matrix"라는 구조체의 선언문
+// "Stack"이라는 구조체의 선언문
+struct Stack               
 {
-    int w;
-    int h;
-    int* data;
+    unsigned int max_size;	    // 최대 사용 가능한 크기
+    int stack_pointer;	    // 데이터가 채워진 마지막 위치
+    unsigned int* data;	    // 데이터
+
 };
+
+
+// 최대 크기가 max_size인 Stack을 생성
+Stack* CreateStack(unsigned int max_size);
+
+// Stack을 삭제
+void DeleteStack(Stack* st);
+
+// Stack src에 있는 모든 정보(최대 크기, 현재 크기, 정보)를 Stack dst로 복사
+void Copy(Stack* src, Stack* dst);
+
+// Stack과 동일한 정보를 가지고 있는 Stack을 추가적으로 생성
+Stack* Clone(Stack* st);
+
+// 데이터 x를 Stack의 가장 위에 추가
+void Push(Stack* st, unsigned int x);
+
+// Stack에서 가장 위에 있는 데이터를 삭제하고 반환, 만약 데이터가 없는 경우 -1 반환
+int Pop(Stack* st);
+
+// Stack에서 가장 위에 있는 데이터를 반환(삭제하지는 않음), 만약 데이터가 없는 경우 -1 반환
+int Top(Stack* st);
+
+// Stack의 최대 사용 가능한 크기 반환
+int MaxSize(Stack* st);
+
+// Stack의 현재 사용 중인 크기 반환
+unsigned int Size(Stack* st);
+
+// Stack이 현재 비어있는지 여부를 반환
+bool isEmpty(Stack* st);
+
+
 
 Matrix* CreateMatrix(int width, int height)         // Matrix를 생성하는 함수
 {
