@@ -113,14 +113,14 @@ int main()
     // mat1 생성 및 숫자 채우기
     cout << "\n mat1 = \n" ;
     Matrix* mat1 = CreateMatrix(w1, h1);
-    int val1 = 4; // mat2 데이터를 채울 값
+    int val1 = 2; // mat2 데이터를 채울 값
     fillArange(mat1, val1);
     PrintMatrix(mat1);
 
     // mat2 생성 및 숫자 채우기
     cout << "\n mat2 = \n" ;
     Matrix* mat2 = CreateMatrix(w2, h2);
-    int val2 = 10; // mat2 데이터를 채울 값
+    int val2 = 1; // mat2 데이터를 채울 값
     fillArange(mat2, val2);
     PrintMatrix(mat2);
 

@@ -218,7 +218,6 @@ int main()
     Stack* st_clone = Clone(st1);
     PrintStack(st_clone); // 여기서 Clone의 데이터가 왜 출력이 안되는 건지 잘 모르겠음.
 
-
     // 동적할당된 변수를 제거하고 마무리
     std::cout << "\n @@@ 동적할당 변수 제거 \n";
     DeleteStack(st1);
