@@ -26,7 +26,7 @@ HeadNode* CreateList()
 }
 
 // 리스트의 가장 뒤에 노드를 삽입하는 함수
-void addNode(HeadNode* H, int x)
+void pushNode(HeadNode* H, int x)
 {
     Node* NewNode = new Node;       // 새로 만들 노드
     Node* LastNode;                 // 원래 있던 노드의 마지막 노드
@@ -54,7 +54,7 @@ void addNode(HeadNode* H, int x)
 
 
 // 리스트의 가장 앞의 노드 삭제하는 함수
-void deleteNode(HeadNode* H) 
+void popNode(HeadNode* H) 
 {
     // 리스트가 비어있을 경우
     if (H->link == NULL) return;
@@ -77,11 +77,53 @@ void deleteNode(HeadNode* H)
 
 }
 
-// 링크드리스트 출력하는 함수
+// 리스트에 특정 데이터가 있는지 확인하는 함수
+bool findNode(const HeadNode* H, int search_data)
+{
+    bool answer;                    // 반환할 답
+
+    Node* searchNode = H->link;     // 서치 노드를 첫 번째 노드로 초기화
+
+    // 서치 노드를 한 칸 씩 뒤로 넘기며 탐색
+    while (true) {        
+
+        // 만약 찾는 데이터가 있다면 1
+        if (searchNode->data == search_data) {
+            answer = 1;
+            break;
+        }
+
+        // 마지막까지 탐색했지만 찾는 데이터가 없다면 0
+        if (searchNode->link == NULL) {
+            answer = 0;
+            break;
+        }
+        
+        // 서치 노드를 한 칸 뒤로 넘김
+        searchNode = searchNode->link;
+
+    }
+
+    return answer;
+
+}
+
+// 리스트를 삭제하는 함수
+void DeleteList(HeadNode* L)
+{   
+    // 헤드 노드에 연결된 모든 노드를 제거 (스택 및 힙 메모리)
+    while (L->link != NULL) popNode(L);        
+    
+    // 헤드 노드를 제거 (힙 메모리)
+    delete L;
+    
+}
+
+// 리스트를 출력하는 함수
 void PrintList(const HeadNode* L)
 {
     Node* p;
-    std::cout << "링크드리스트 목록 = (";
+    std::cout << " ** 링크드리스트 목록 = (";
     p = L->link;
 
     while (p != NULL) {
@@ -96,57 +138,53 @@ void PrintList(const HeadNode* L)
 
 }
 
-// 동적할당 변수 삭제하는 함수
-void DeleteMallocParam(HeadNode* L)
-{   
-    // 헤드 노드에 연결된 모든 노드를 제거
-    while (L->link != NULL) deleteNode(L);        
-    
-    // 헤드 노드를 제거
-    delete L;
-    
-}
-
 
 int main() 
 {   
-    std::cout << "빈 링크드리스트를 생성" << std::endl;
+    std::cout << "\n * 빈 리스트를 생성" << std::endl;
     HeadNode* L = CreateList();
 
-    std::cout << "링크드리스트에 추가할 노드의 데이터를 3개 입력:" << std::endl;
+    std::cout << "\n * 리스트에 추가할 노드의 데이터를 3개 입력: ";
     int data1, data2, data3;
     std::cin >> data1 >> data2 >> data3;
-    addNode(L, data1);
+    pushNode(L, data1);
     PrintList(L);
-    addNode(L, data2);
+    pushNode(L, data2);
     PrintList(L);
-    addNode(L, data3);
-    PrintList(L);
-
-    std::cout << "링크드리스트의 가장 앞에 있는 데이터를 삭제" << std::endl;
-    deleteNode(L);
+    pushNode(L, data3);
     PrintList(L);
 
-    std::cout << "링크드리스트의 가장 앞에 있는 데이터를 삭제" << std::endl;
-    deleteNode(L);
+    std::cout << "\n * 리스트의 가장 앞에 있는 데이터를 삭제" << std::endl;
+    popNode(L);
     PrintList(L);
 
-    std::cout << "다시 링크드리스트에 추가할 노드의 데이터를 3개 입력:" << std::endl;
+    std::cout << "\n * 리스트의 가장 앞에 있는 데이터를 삭제" << std::endl;
+    popNode(L);
+    PrintList(L);
+
+    std::cout << "\n * 다시 리스트에 추가할 노드의 데이터를 3개 입력: ";
     int data4, data5, data6;
     std::cin >> data4 >> data5 >> data6;
-    addNode(L, data4);
+    pushNode(L, data4);
     PrintList(L);
-    addNode(L, data5);
+    pushNode(L, data5);
     PrintList(L);
-    addNode(L, data6);
-    PrintList(L);
-
-    std::cout << "링크드리스트의 가장 앞에 있는 데이터를 삭제" << std::endl;
-    deleteNode(L);
+    pushNode(L, data6);
     PrintList(L);
 
-    std::cout << "힙 메모리의 동적할당 변수 제거" << std::endl;
-    DeleteMallocParam(L);
+    std::cout << "\n * 리스트의 가장 앞에 있는 데이터를 삭제" << std::endl;
+    popNode(L);
+    PrintList(L);
+
+    std::cout << "\n * 리스트에 특정 데이터가 있는지 탐색: ";
+    int search_data;
+    std::cin >> search_data;
+    bool search_result = findNode(L, search_data);
+    if (search_result == 1) std::cout << "** " << search_data << " 은(는) 리스트에 존재함 \n" ;
+    else std::cout << "** " << search_data << " 은(는) 리스트에 존재하지 않음 \n" ;
+
+    std::cout << "\n * 리스트 삭제" << std::endl;
+    DeleteList(L);
 
     return 0;
 
