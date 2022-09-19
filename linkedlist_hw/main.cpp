@@ -80,22 +80,21 @@ void popNode(HeadNode* H)
 // 리스트에 특정 데이터가 있는지 확인하는 함수
 bool findNode(const HeadNode* H, int search_data)
 {
-    bool answer;                    // 반환할 답
+    bool answer = 0;                    // 반환할 답
 
     Node* searchNode = H->link;     // 서치 노드를 첫 번째 노드로 초기화
 
     // 서치 노드를 한 칸 씩 뒤로 넘기며 탐색
     while (true) {        
 
-        // 만약 찾는 데이터가 있다면 1
+        // 만약 찾는 데이터가 있다면 답을 1로 바꾸고 탈출
         if (searchNode->data == search_data) {
             answer = 1;
             break;
         }
 
-        // 마지막까지 탐색했지만 찾는 데이터가 없다면 0
+        // 서치 노드가 마지막에 도달했으면 탈출
         if (searchNode->link == NULL) {
-            answer = 0;
             break;
         }
         
