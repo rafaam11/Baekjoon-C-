@@ -1,11 +1,4 @@
 #include "PokemonS.h"
-#include <iostream>
-#include <string>
-#include <array>
-#include <vector>
-
-using namespace std;
-const int max_dict_num = 905;		// 포켓몬 도감의 끝번
 
 
 int main() {
