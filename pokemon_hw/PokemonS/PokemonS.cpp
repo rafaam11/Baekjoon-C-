@@ -1,4 +1,4 @@
-﻿#include "PokemonS.h"
+#include "PokemonS.h"
 #include <iostream>
 #include <string>
 #include <array>
@@ -41,6 +41,41 @@ auto AddPokemon(array<PokemonInfo, max_dict_num> dict, PokemonInfo pokemon)
 
 }
 
+
+// 도감 객체에서 이름 기반으로 포켓몬 정보를 검색
+PokemonInfo SearchPokemon(array<PokemonInfo, max_dict_num> dict, string name)
+{	
+	bool existance = false;
+	int numb;
+
+	for (int i = 0 ; i < max_dict_num ; ++i) {
+		if ( (dict[i]).p_name == name) {
+			existance = true;
+			numb = i;
+		}
+	}
+
+	if (existance == true) {
+		PokemonInfo pokemon = {(dict[numb]).p_number, (dict[numb]).p_name, (dict[numb]).p_type };
+		cout << "찾은 포켓몬 이름: " << pokemon.p_name << ", ";
+		cout << "번호: " << pokemon.p_number << ", ";
+		cout << "타입: " << pokemon.p_type << endl;
+		return pokemon;
+	}
+
+	else cout << name << "은(는) 포켓몬 도감에 등록되어 있지 않습니다." << endl;
+
+}
+
+
+// 도감 객체에서 이름 기반으로 포켓몬 정보를 삭제
+void RemovePokemon(array<PokemonInfo, max_dict_num> dict, string name)
+{
+
+}
+
+
+
 // 도감을 출력하는 함수
 void PrintDict(const array<PokemonInfo, max_dict_num> dict)
 {
@@ -70,10 +105,13 @@ int main() {
 	dict = AddPokemon(dict, pokemon6);
 	dict = AddPokemon(dict, pokemon8);
 	dict = AddPokemon(dict, pokemon25);
-
 	PrintDict(dict);
 
+	PokemonInfo search_pokemon1 = SearchPokemon(dict, "이상해씨");
+	PokemonInfo search_pokemon2 = SearchPokemon(dict, "파이리");
 
+
+	
+
+	return 0;
 }
-
-
