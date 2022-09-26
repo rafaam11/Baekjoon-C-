@@ -1,78 +1,77 @@
 ﻿#include "PokemonS.h"
 #include <iostream>
 #include <string>
+#include <array>
 #include <vector>
-#include <list>
-#include <set>
 
 using namespace std;
+const int max_dict_num = 905;		// 포켓몬 도감의 끝번
 
+// 포켓몬 정보 구조체 선언
 struct PokemonInfo
 {
-	string p_name;							// 포켓몬 이름 (string형)
-	int p_number;							// 포켓몬 번호 (int형)
-	string p_type;							// 포켓몬 타입 (string형)
+	int p_number;					// 포켓몬 번호 (int형)
+	string p_name;					// 포켓몬 이름 (string형)
+	string p_type;					// 포켓몬 타입 (string형)
 
 };
 
-auto CreatePokemonDict()										// 도감 객체를 생성
+// 포켓몬 도감을 생성하는 함수
+auto CreatePokemonDict()	
 {
-	list<PokemonInfo>* dict = new list<PokemonInfo>;
+	array<PokemonInfo, max_dict_num> dict;
+	for (int i = 0 ; i < max_dict_num ; ++i) {
+		dict[i].p_name = "null";
+		dict[i].p_number = i+1;
+		dict[i].p_type = "null";
+	}
 
 	return dict;
 
 }
 
-void AddPokemon(list<PokemonInfo> dict, const PokemonInfo pokemon)			// 도감 객체에 포켓몬 정보를 추가
+// 도감 객체에 포켓몬 정보를 추가
+auto AddPokemon(array<PokemonInfo, max_dict_num> dict, PokemonInfo pokemon)			
 {
-	dict.push_back(pokemon);
-}
+	(dict[pokemon.p_number - 1]).p_number = pokemon.p_number;
+	(dict[pokemon.p_number - 1]).p_name = pokemon.p_name;
+	(dict[pokemon.p_number - 1]).p_type = pokemon.p_type;
 
-PokemonInfo SearchPokemon(list<PokemonInfo> dict, string name)		// 도감 객체에서 이름 기반으로 포켓몬 정보를 검색
-{
-
-}
-
-void RemovePokemon(list<PokemonInfo> dict, string name)				// 도감 객체에서 이름 기반으로 포켓몬 정보를 삭제
-{
+	return dict;
 
 }
 
-void PrintDict(list<PokemonInfo> dict)
+// 도감을 출력하는 함수
+void PrintDict(const array<PokemonInfo, max_dict_num> dict)
 {
-	list<PokemonInfo>::iterator it;
+	cout << " 등록된 포켓몬 정보 " << endl;
 
-	for (it = dict.begin(); it != dict.end(); it++) {
-		cout << "이름: " << (*it).p_name << ", ";
-		cout << "번호: " << (*it).p_number << ", ";
-		cout << "타입: ";
-
+	for (int i = 0 ; i < max_dict_num ; ++i) {
+		if ( (dict[i]).p_name != "null") {
+			cout << "이름: " << (dict[i]).p_name << ", ";
+			cout << "번호: " << (dict[i]).p_number << ", ";
+			cout << "타입: " << (dict[i]).p_type << endl;
+		}
 	}
-
-}
-
-vector<string> WritePokemonType(string type_name)			// 타입 이름을 "," 로 구분하여 벡터로 저장
-{
-	string delimiter = ",";
-	vector<string> type{};
-
-	size_t pos = 0;
-	while ((pos = type_name.find(delimiter)) != string::npos) {
-		type.push_back(type_name.substr(0, pos));
-		type_name.erase(0, pos + delimiter.length());
-	}
-
-	return type;
 
 }
 
 
 int main() {
-	list<PokemonInfo>* dict = CreatePokemonDict();
-	PokemonInfo pokemon1 = { '이상해씨', 1, '풀, 독' };
 
+	array<PokemonInfo, max_dict_num> dict = CreatePokemonDict();
 
+	PokemonInfo pokemon1 = {1, "이상해씨", "풀, 독"};
+	PokemonInfo pokemon6 = {6, "리자몽", "불꽃, 비행"};
+	PokemonInfo pokemon8 = {8, "어니부기", "물"};
+	PokemonInfo pokemon25 = {25, "피카츄", "전기"};
 
+	dict = AddPokemon(dict, pokemon1);
+	dict = AddPokemon(dict, pokemon6);
+	dict = AddPokemon(dict, pokemon8);
+	dict = AddPokemon(dict, pokemon25);
+
+	PrintDict(dict);
 
 
 }

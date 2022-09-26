@@ -1,8 +1,8 @@
 #include "PokemonS.h"
 #include <iostream>
 #include <string>
-#include <map>
-#include <list>
+#include <array>
+#include <vector>
 
 using namespace std;
 
@@ -11,21 +11,19 @@ struct PokemonInfo
 {
 	int p_number;					// 포켓몬 번호 (int형)
 	string p_name;					// 포켓몬 이름 (string형)
-
-};
-
-// 포켓몬 도감 구조체 선언
-struct PokemonDict
-{
-	PokemonInfo* next_pokemon;
+	string p_type;					// 포켓몬 타입 (string형)
 
 };
 
 // 포켓몬 도감을 생성하는 함수
-PokemonDict* CreatePokemonDict()	
+auto CreatePokemonDict()	
 {
-	PokemonDict* dict = new PokemonDict;
-	dict->next_pokemon = nullptr;
+	array<PokemonInfo, 905> dict;
+	for (int i = 0 ; i < 905 ; ++i) {
+		dict[i]->p_name = "null";
+		dict[i]->p_number = i+1;
+		dict[i]->p_type = "null";
+	}
 
 	return dict;
 
@@ -33,90 +31,55 @@ PokemonDict* CreatePokemonDict()
 
 
 // 도감 객체에 포켓몬 정보를 추가
-void AddPokemon(PokemonDict* dict, int number, string name, string type)			
+void AddPokemon(PokemonInfo* dict[], PokemonInfo* pokemon)			
 {
-	PokemonInfo* new_pokemon = new PokemonInfo;
-	PokemonInfo* last_pokemon;
-
-	new_pokemon->p_name = name;
-	new_pokemon->p_number = number;
-	new_pokemon->p_type = type;
-	new_pokemon->next_pokemon = nullptr;
-
-	// 도감이 비어있을 경우
-	if (dict->next_pokemon == nullptr) {
-		dict->next_pokemon == new_pokemon;	// 더미에 새 포켓몬을 연결시킴.
-		return;
-	}
-
-	// 도감이 비어있지 않은 경우
-	else {
-
-		last_pokemon = dict->next_pokemon;		// 더미를 마지막 포켓몬으로 초기화.
-
-		while (last_pokemon->next_pokemon != nullptr) last_pokemon = last_pokemon->next_pokemon;
-		// 한 칸씩 이동하면서 연결된 포켓몬이 없는 포켓몬까지 이동.
-
-		last_pokemon->next_pokemon = new_pokemon;		// 마지막 포켓몬 뒤에 새 포켓몬을 연결시킴.
-
-	}
-
-	
-}
-
-PokemonInfo SearchPokemon(list<PokemonInfo> dict, string name)		// 도감 객체에서 이름 기반으로 포켓몬 정보를 검색
-{
+	(dict[pokemon->p_number - 1])->p_number = pokemon->p_number;
+	(dict[pokemon->p_number - 1])->p_name = pokemon->p_name;
+	(dict[pokemon->p_number - 1])->p_type = pokemon->p_type;
 
 }
 
-void RemovePokemon(list<PokemonInfo> dict, string name)				// 도감 객체에서 이름 기반으로 포켓몬 정보를 삭제
-{
 
-}
+
+
 
 // 도감을 출력하는 함수
-void PrintDict(const PokemonDict* dict)
+void PrintDict(PokemonInfo* dict[])
 {
-	PokemonInfo* p;
 	cout << " 포켓몬 도감 정보 " << endl;
-	p = dict->next_pokemon;
 
-	while (p != nullptr) {
-		cout << "이름: " << p->p_name << ", ";
-		cout << "번호: " << p->p_number << ", ";
-		cout << "타입: " << p->p_type << endl;
-		p = p->next_pokemon;
-
+	for (int i = 0 ; i < 905 ; ++i) {
+		cout << "이름: " << (dict[i])->p_name << ", ";
+		cout << "번호: " << (dict[i])->p_number << ", ";
+		cout << "타입: " << (dict[i])->p_type << endl;
 	}
-
-}
-
-vector<string> WritePokemonType(string type_name)			// 타입 이름을 "," 로 구분하여 벡터로 저장
-{
-	string delimiter = ",";
-	vector<string> type{};
-
-	size_t pos = 0;
-	while ((pos = type_name.find(delimiter)) != string::npos) {
-		type.push_back(type_name.substr(0, pos));
-		type_name.erase(0, pos + delimiter.length());
-	}
-
-	return type;
 
 }
 
 
 int main() {
 
-	PokemonDict* pokemon_dict = CreatePokemonDict();
+	PokemonInfo* dict[905];
 
-	AddPokemon(pokemon_dict, 1, "이상해씨", "풀, 독");
-	AddPokemon(pokemon_dict, 6, "리자몽", "불꽃, 비행");
-	AddPokemon(pokemon_dict, 8, "어니부기", "물");
-	AddPokemon(pokemon_dict, 25, "피카츄", "전기");
+	for (int i = 0 ; i < 905 ; ++i) {
+		dict[i]->p_name = "null";
+		dict[i]->p_number = i+1;
+		dict[i]->p_type = "null";
+	}
 
-	PrintDict(pokemon_dict);
+	PokemonInfo pokemon1 = {1, "이상해씨", "풀, 독"};
+	PokemonInfo pokemon6 = {6, "리자몽", "불꽃, 비행"};
+	PokemonInfo pokemon8 = {8, "어니부기", "물"};
+	PokemonInfo pokemon25 = {25, "피카츄", "전기"};
+
+	AddPokemon(dict, &pokemon1);
+	AddPokemon(dict, &pokemon6);
+	AddPokemon(dict, &pokemon8);
+	AddPokemon(dict, &pokemon25);
+
+
+
+	PrintDict(dict);
 
 
 
