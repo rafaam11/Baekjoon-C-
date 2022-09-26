@@ -2,19 +2,8 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include <vector>
 
 using namespace std;
-const int max_dict_num = 905;		// 포켓몬 도감의 끝번
-
-// 포켓몬 정보 구조체 선언
-struct PokemonInfo
-{
-	int p_number;					// 포켓몬 번호 (int형)
-	string p_name;					// 포켓몬 이름 (string형)
-	string p_type;					// 포켓몬 타입 (string형)
-
-};
 
 // 포켓몬 도감을 생성하는 함수
 auto CreatePokemonDict()	
@@ -42,8 +31,8 @@ auto AddPokemon(array<PokemonInfo, max_dict_num> dict, PokemonInfo pokemon)
 }
 
 
-// 도감 객체에서 이름 기반으로 포켓몬 정보를 검색
-PokemonInfo SearchPokemon(array<PokemonInfo, max_dict_num> dict, string name)
+// 도감 객체에서 이름 기반으로 포켓몬 숫자를 검색
+int SearchPokemonNumber(array<PokemonInfo, max_dict_num> dict, string name)
 {	
 	bool existance = false;
 	int numb;
@@ -57,21 +46,52 @@ PokemonInfo SearchPokemon(array<PokemonInfo, max_dict_num> dict, string name)
 
 	if (existance == true) {
 		PokemonInfo pokemon = {(dict[numb]).p_number, (dict[numb]).p_name, (dict[numb]).p_type };
+		return numb;
+	}
+
+	else {
+		return -1;
+
+	} 
+}
+
+// 도감 객체에서 이름 기반으로 포켓몬 숫자를 검색하여 출력
+auto SearchPokemon(array<PokemonInfo, max_dict_num> dict, int search_pokemon_number)
+{	
+	int numb = search_pokemon_number;
+
+	if (numb != -1) {
+		PokemonInfo pokemon = {(dict[numb]).p_number, (dict[numb]).p_name, (dict[numb]).p_type };
 		cout << "찾은 포켓몬 이름: " << pokemon.p_name << ", ";
 		cout << "번호: " << pokemon.p_number << ", ";
 		cout << "타입: " << pokemon.p_type << endl;
 		return pokemon;
 	}
 
-	else cout << name << "은(는) 포켓몬 도감에 등록되어 있지 않습니다." << endl;
+	else {
+		cout << "입력한 포켓몬은 도감에 등록되어 있지 않습니다." << endl;
 
+	} 
 }
 
 
 // 도감 객체에서 이름 기반으로 포켓몬 정보를 삭제
-void RemovePokemon(array<PokemonInfo, max_dict_num> dict, string name)
+auto RemovePokemon(array<PokemonInfo, max_dict_num> dict, int search_pokemon_number)
 {
+	int numb = search_pokemon_number;
 
+	if (numb != -1) {
+		cout << dict[numb].p_name << "을(를) 제거합니다." << endl;
+		dict[numb].p_name = "null";
+		dict[numb].p_type = "null";
+		return dict;
+	}
+
+	else {
+		cout << "입력한 포켓몬은 도감에 등록되어 있지 않습니다." << endl;
+		return dict;
+
+	}
 }
 
 
@@ -79,7 +99,7 @@ void RemovePokemon(array<PokemonInfo, max_dict_num> dict, string name)
 // 도감을 출력하는 함수
 void PrintDict(const array<PokemonInfo, max_dict_num> dict)
 {
-	cout << " 등록된 포켓몬 정보 " << endl;
+	cout << " 현재 등록된 포켓몬 정보 " << endl;
 
 	for (int i = 0 ; i < max_dict_num ; ++i) {
 		if ( (dict[i]).p_name != "null") {
@@ -91,27 +111,3 @@ void PrintDict(const array<PokemonInfo, max_dict_num> dict)
 
 }
 
-
-int main() {
-
-	array<PokemonInfo, max_dict_num> dict = CreatePokemonDict();
-
-	PokemonInfo pokemon1 = {1, "이상해씨", "풀, 독"};
-	PokemonInfo pokemon6 = {6, "리자몽", "불꽃, 비행"};
-	PokemonInfo pokemon8 = {8, "어니부기", "물"};
-	PokemonInfo pokemon25 = {25, "피카츄", "전기"};
-
-	dict = AddPokemon(dict, pokemon1);
-	dict = AddPokemon(dict, pokemon6);
-	dict = AddPokemon(dict, pokemon8);
-	dict = AddPokemon(dict, pokemon25);
-	PrintDict(dict);
-
-	PokemonInfo search_pokemon1 = SearchPokemon(dict, "이상해씨");
-	PokemonInfo search_pokemon2 = SearchPokemon(dict, "파이리");
-
-
-	
-
-	return 0;
-}
