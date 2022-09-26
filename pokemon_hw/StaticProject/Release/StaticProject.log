@@ -1,0 +1,4 @@
+﻿  main.cpp
+  PokemonS.cpp
+MSVCRT.lib(exe_winmain.obj) : error LNK2001: 확인할 수 없는 외부 기호 _WinMain@16
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\StaticProject\Release\StaticProject.exe : fatal error LNK1120: 1개의 확인할 수 없는 외부 참조입니다.
