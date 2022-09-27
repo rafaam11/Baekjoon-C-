@@ -1,0 +1,20 @@
+﻿  PokemonD.cpp
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.cpp(8,34): warning C4273: 'CreatePokemonDict': dll 연결이 일치하지 않습니다.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.h(25,51): message : 'CreatePokemonDict'의 이전 정의를 참조하십시오.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.cpp(22,34): warning C4273: 'AddPokemon': dll 연결이 일치하지 않습니다.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.h(26,51): message : 'AddPokemon'의 이전 정의를 참조하십시오.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.cpp(34,5): warning C4273: 'SearchPokemonNumber': dll 연결이 일치하지 않습니다.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.h(27,22): message : 'SearchPokemonNumber'의 이전 정의를 참조하십시오.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.cpp(58,13): warning C4273: 'SearchPokemon': dll 연결이 일치하지 않습니다.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.h(28,30): message : 'SearchPokemon'의 이전 정의를 참조하십시오.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.cpp(78,34): warning C4273: 'RemovePokemon': dll 연결이 일치하지 않습니다.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.h(29,51): message : 'RemovePokemon'의 이전 정의를 참조하십시오.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.cpp(99,6): warning C4273: 'PrintDict': dll 연결이 일치하지 않습니다.
+C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\PokemonD\PokemonD.h(30,23): message : 'PrintDict'의 이전 정의를 참조하십시오.
+     C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\Release\PokemonD.lib 라이브러리 및 C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\Release\PokemonD.exp 개체를 생성하고 있습니다.
+  코드를 생성하고 있습니다.
+  0 of 121 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  코드를 생성했습니다.
+  PokemonD.vcxproj -> C:\Users\JinminKim\Documents\GitHub\Baekjoon-cpp\pokemon_hw\PokemonProject\Release\PokemonD.dll
