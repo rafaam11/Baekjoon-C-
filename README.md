@@ -1,2 +1,2 @@
-# Study-C++
+# Study_C++
 Baekjoon programming training (C++)
